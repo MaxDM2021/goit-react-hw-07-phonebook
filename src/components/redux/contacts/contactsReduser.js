@@ -49,7 +49,7 @@ const contactsSlice = createSlice({
 
     [deleteContact.pending]: onPending,
     [deleteContact.fulfilled]: (state, { payload }) => {
-      state.items.filter(item => item.id !== payload.id);
+      state.items = state.items.filter(item => item.id !== payload);
       state.isLoading = false;
       state.error = null;
     },

@@ -1,10 +1,9 @@
-
 import { useEffect } from 'react';
 import shortid from 'shortid';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchContacts } from './redux/contacts/contactsOperations';
-import { getFilterValue } from './redux/filterSlice';
 import { addContacts } from './redux/contacts/contactsOperations';
 import { getContacts } from './redux/contacts/contactsReduser';
 
@@ -13,27 +12,18 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import './App.scss';
 
-
-
 export default function App() {
-
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
 
   console.log(contacts);
-  
-  const filterContact = useSelector(getFilterValue);
-
-  
-
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   const addCont = (name, number) => {
-   
     const newContact = {
       id: shortid.generate(),
       name,
@@ -47,32 +37,10 @@ export default function App() {
 
       return false;
     }
-    dispatch(addContacts(newContact))
-    // setContacts(prevState => [newContact, ...prevState]);
+    dispatch(addContacts(newContact));
+
     return true;
   };
-
-  // const changeFilter = e => {
-  //   setFilt(e.currentTarget.value.toLowerCase());
-  // };
-
-  const constgetVisibleContacts = () => {
-    if (filterContact === '') {
-      return false;
-    }
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filterContact)
-    );
-  };
-
-
-
-  // const deleteContact = contactId => {
-  //   setContacts(prevState =>
-  //     prevState.filter(contact => contact.id !== contactId)
-  //   );
-  // };
 
   return (
     <div className="Phonebook">
@@ -80,12 +48,8 @@ export default function App() {
       <ContactForm onSubmit={addCont} />
 
       <h2 className="TitleContacts">Contacts</h2>
-      <Filter value={filterContact} />
-      <ContactList
-        contacts={
-          constgetVisibleContacts() ? constgetVisibleContacts() : contacts
-        }
-      />
+      <Filter />
+      <ContactList />
     </div>
   );
 }
