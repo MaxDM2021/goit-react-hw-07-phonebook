@@ -1,0 +1,13 @@
+@import 'styles/shared.scss';
+
+.Phonebook {
+  display: flex;
+  flex-direction: column;
+align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.TitleContacts {
+  font-size: 32px;
+}
