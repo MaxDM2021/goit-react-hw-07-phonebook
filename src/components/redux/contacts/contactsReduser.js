@@ -41,7 +41,7 @@ const contactsSlice = createSlice({
 
     [addContacts.pending]: onPending,
     [addContacts.fulfilled]: (state, { payload }) => {
-      state.items = payload.push(payload);
+      state.items.push(payload);
       state.isLoading = false;
       state.error = null;
     },
@@ -49,7 +49,7 @@ const contactsSlice = createSlice({
 
     [deleteContact.pending]: onPending,
     [deleteContact.fulfilled]: (state, { payload }) => {
-      state.items = state.items.filter(item => item.id !== payload.id);
+      state.items.filter(item => item.id !== payload.id);
       state.isLoading = false;
       state.error = null;
     },

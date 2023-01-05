@@ -15,15 +15,15 @@ const contacts = useSelector(getContacts);
 
 return (
   <ul className="ContactList">
-    {contacts.map(({ id, name, number }) => (
+    {contacts.map(({ id, name, phone }) => (
       <li key={id} className="ContactList__item">
         <p className="TodoList__text">
-          {name}: {number}
+          {name}: {phone }
         </p>
         <button
           type="button"
           className="ContactList__btn"
-          onClick={(e) => dispatch(deleteContact(e.target.name))}
+          onClick={() => dispatch(deleteContact(id))}
         >
           Delete
         </button>

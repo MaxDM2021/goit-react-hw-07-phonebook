@@ -20,13 +20,12 @@ export default function App() {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
+
+  console.log(contacts);
+  
   const filterContact = useSelector(getFilterValue);
 
-
-  // useEffect(() => {
-  //   // bookShelfAPI.fetchBooks().then(setBooks);
-  //   dispatch(contactsOperations.fetchContacts())
-  // }, [dispatch]);
+  
 
 
   useEffect(() => {
