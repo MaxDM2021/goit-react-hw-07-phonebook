@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import shortid from 'shortid';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { fetchContacts } from './redux/contacts/contactsOperations';
 import { addContacts } from './redux/contacts/contactsOperations';
-import { getContacts } from './redux/contacts/contactsReduser';
-
+import { getContacts, selectIsLoading, selectError } from './redux/contacts/contactsReduser';
+import  Loader  from './Loader/Loader';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
@@ -16,8 +15,10 @@ export default function App() {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  console.log(contacts);
+
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -46,9 +47,9 @@ export default function App() {
     <div className="Phonebook">
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addCont} />
-
       <h2 className="TitleContacts">Contacts</h2>
       <Filter />
+      {isLoading && !error && <Loader />}
       <ContactList />
     </div>
   );
